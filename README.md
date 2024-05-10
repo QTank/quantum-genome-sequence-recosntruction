@@ -14,4 +14,4 @@ Genome sequence reconstruction is a process of reconstructing a complete genome 
 * TSP: genome sequence reconstruction can be seen as TSP.
 
 ## VQE
-A Hamiltonian was constructed for the genome sequence reconstruction. THen VQE on Qiskit was utilized for genome sequence reconstruction. 
+A Hamiltonian was constructed for the genome sequence reconstruction. Then VQE on Qiskit was utilized for genome sequence reconstruction. 
