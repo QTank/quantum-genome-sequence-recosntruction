@@ -78,12 +78,22 @@ class Reconstruction:
             sequence_list.append(self.reads[index])
         return sequence_list
 
+    def reconstruction_sequence(self, sequence_list):
+        sequence = sequence_list[0]
+        for index in range(1, len(sequence_list)):
+            overlap_len = util.find_overlap_length(sequence_list[index-1], sequence_list[index])
+            sequence += sequence_list[index][overlap_len:]
+        return sequence
 
-reads = ["ATGGCGTGCA", "GCGTGCAATG", "TGCAATGGCG", "AATGGCGTGC"]
-test = Reconstruction(reads)
+
+file_name = "data"
+with open(file_name, 'r') as f:
+    data = [line.strip() for line in f.readlines()]
+test = Reconstruction(data)
 qubit_operator = test.create_operator()
 bitstring, min_value = VQE.get_min(qubit_operator)
 sequence_list = test.decode_bitstring(bitstring)
 result = " -> ".join(sequence_list)
 print(f"The final sequence order is {result}")
-
+sequence = test.reconstruction_sequence(sequence_list)
+print(f"The genome assembly is {sequence}, the length is {len(sequence)}")
